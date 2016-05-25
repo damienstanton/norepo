@@ -13,7 +13,7 @@ function createWindow() {
   win = new BrowserWindow({width: 800, height: 600});
   win.loadURL(`file://${__dirname}/electro/www/index.html`);
 
-  // DEBUG open the DevTools in case something is awry
+  // DEBUG open dev tools in case there is a problem
   // win.webContents.openDevTools();
 
   win.on("closed", () => {
@@ -23,7 +23,7 @@ function createWindow() {
 
 app.on("ready", createWindow);
 
-// These two functions ensure good behavior on OSX
+// The following two functions ensure good behavior on OSX
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
