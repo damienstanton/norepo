@@ -1,0 +1,22 @@
+{
+  "name": "electrots",
+  "version": "0.1.0",
+  "description": "TypeScript and Electron starter thing",
+  "main": "build/main.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damienstanton/norepo.git"
+  },
+  "author": "Infrastructure AI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/damienstanton/norepo/issues"
+  },
+  "homepage": "https://github.com/damienstanton/norepo#readme",
+  "dependencies": {
+    "jasmine": "^2.4.1"
+  }
+}
