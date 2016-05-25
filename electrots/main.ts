@@ -11,11 +11,11 @@ const {BrowserWindow} = electron;
 let win;
 
 function createWindow() {
-  win = new BrowserWindow({width: 800, height: 600});
+  win = new BrowserWindow({width: 1080, height: 960});
   win.loadURL(`file://${__dirname}/index.html`);
 
   // Pop open devtools in case anything has gone awry on startup
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   win.on("closed", () => {
     win = null;
