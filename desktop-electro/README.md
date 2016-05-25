@@ -1,4 +1,4 @@
-This is a repo where I am combining:
+Here I am combining:
 * [Electron](http://electron.atom.io/)
 * [Ionic 2 Framework](http://ionic.io/)
 
