@@ -1,1 +1,1 @@
-Here I am exploring whether it makes sense to write an embedded server in Go and have []`gopherjs`](http://www.gopherjs.org/) compile this to JavaScript which could then be embedded in an Electron/Ionic app.
+Here I am exploring whether it makes sense to write an embedded server in Go and have [`gopherjs`](http://www.gopherjs.org/) compile this to JavaScript which could then be embedded in an Electron/Ionic app.
