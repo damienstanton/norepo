@@ -5,7 +5,6 @@ Contents:
 
 
 * APISkeleton: a design-driven API in Goa, a Go DSL and code-generation tool.
-* Microservice: learning Go-Kit for back end microservices.
 * Nats: learning the nats message queue (think Rabbit MQ, but faster?).
 * Progenitor: experimenting with two-way EDN<->Protobuf conversion
 
