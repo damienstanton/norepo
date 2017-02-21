@@ -9,6 +9,11 @@ import (
 
 var dummyObject = []byte("blah")
 
+// Interesting note:
+// "The scope of the function is the scope of the transaction.
+// If the function passed to Update returns nil, all updates from
+// the transactionare atomically stored to the database. If the function
+// passed to Update returns an error, the transaction is rolled back."
 func main() {
 	// Bolt is a COW B+ tree in the file optimized for reads
 	// LSM tree in, say LevelDB is optimized for writes
