@@ -35,4 +35,11 @@ func main() {
 		c <- 1
 	}(right)
 	fmt.Println(<-min)
+	// use the First func, and time it
+	rand.Seed(time.Now().UnixNano())
+	start := time.Now()
+	result := First("golang", fakeSearch("rep 1"), fakeSearch("rep 2"))
+	elapsed := time.Since(start)
+	fmt.Println(result)
+	fmt.Println(elapsed)
 }

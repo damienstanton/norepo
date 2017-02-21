@@ -80,3 +80,14 @@ func GoogleV21(q string) (finalResults []Result) {
 	}
 	return finalResults
 }
+
+// First replicates the servers
+// Goal is to avoid throwing out the results if a timeout expires
+func First(q string, replicas ...Search) Result {
+	c := make(chan Result)
+	searchReplica := func(i int) { c <- replicas[i](q) }
+	for i := range replicas {
+		go searchReplica(i)
+	}
+	return <-c
+}
