@@ -6,9 +6,12 @@ import (
 )
 
 var (
-	Web   = fakeSearch("web")
-	Image = fakeSearch("Image")
-	Video = fakeSearch("Video")
+	Web1   = fakeSearch("web")
+	Image1 = fakeSearch("Image")
+	Video1 = fakeSearch("Video")
+	Web2   = fakeSearch("web")
+	Image2 = fakeSearch("Image")
+	Video2 = fakeSearch("Video")
 )
 
 // Result is a fake result
@@ -90,4 +93,32 @@ func First(q string, replicas ...Search) Result {
 		go searchReplica(i)
 	}
 	return <-c
+}
+
+// GoogleV30 sums the feature set we've been iterating on
+// It's good because we can now guarantee that all 3 results return within 80ms
+// from a set of replica servers.
+func GoogleV30(q string) (finalResults []Result) {
+	c := make(chan Result)
+	go func() {
+		c <- First(q, Web1, Web2)
+	}()
+	go func() {
+		c <- First(q, Image1, Image2)
+	}()
+	go func() {
+		c <- First(q, Video1, Video2)
+	}()
+
+	timeout := time.After(80 * time.Millisecond)
+	for i := 0; i < 3; i++ {
+		select {
+		case res := <-c:
+			finalResults = append(finalResults, res)
+		case <-timeout:
+			fmt.Println("Timed out")
+			return
+		}
+	}
+	return finalResults
 }
