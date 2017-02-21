@@ -1,4 +1,5 @@
-// Package conpat is based on 2012 talk 'Go Concurrency Patterns' by Rob Pike
+// Program conpat is based on 2012 talk 'Go Concurrency Patterns' by Rob Pike
+// as well as the 2013 talk 'Advanced Go Concurrency Patterns' by Sameer Ajmani
 package main
 
 import (
@@ -10,7 +11,14 @@ import (
 // SleepVal is how long we want our fake exec time to be
 var SleepVal = time.Duration(rand.Intn(1e3)) * time.Millisecond
 
+// Ball is the ball in a ping-pong game
+type Ball struct {
+	hits int
+}
+
 func main() {
+	/* Basics */
+
 	fmt.Println("Running fanIn example...")
 	c := fanIn(boringGenerator("A"), boringGenerator("B"))
 	for i := 0; i < 10; i++ {
@@ -42,4 +50,16 @@ func main() {
 	elapsed := time.Since(start)
 	fmt.Println(result)
 	fmt.Println(elapsed)
+
+	/* Advanced */
+
+	// Ping pong game
+	table := make(chan *Ball)
+	go player("ping", table)
+	go player("pong", table)
+	// start the game
+	table <- new(Ball)
+	time.Sleep(1 * time.Second)
+	// end the game
+	<-table
 }

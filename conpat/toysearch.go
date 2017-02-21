@@ -84,7 +84,7 @@ func GoogleV21(q string) (finalResults []Result) {
 	return finalResults
 }
 
-// First replicates the servers
+// First replicates the servers and returns the one that answers, well, first.
 // Goal is to avoid throwing out the results if a timeout expires
 func First(q string, replicas ...Search) Result {
 	c := make(chan Result)
