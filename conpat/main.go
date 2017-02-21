@@ -10,13 +10,6 @@ import (
 // SleepVal is how long we want our fake exec time to be
 var SleepVal = time.Duration(rand.Intn(1e3)) * time.Millisecond
 
-func boring(msg string, c chan string) {
-	for i := 0; ; i++ {
-		c <- fmt.Sprintf("%s %d", msg, i)
-		time.Sleep(SleepVal)
-	}
-}
-
 func main() {
 	c := fanIn(boringGenerator("A"), boringGenerator("B"))
 	for i := 0; i < 10; i++ {
