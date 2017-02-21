@@ -18,6 +18,7 @@ func main() {
 	}
 	fmt.Println("Exiting both fanIn goroutines...")
 	fmt.Println("Running daisy chain example...")
+	// goroutines are lightweight, bro
 	const n = 100000
 	// min in this case is the "leftmost" agent
 	min := make(chan int)
