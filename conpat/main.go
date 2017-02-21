@@ -18,12 +18,9 @@ func boring(msg string, c chan string) {
 }
 
 func main() {
-
-	c := make(chan string)
-
-	go boring("message", c)
-	for i := 0; i < 5; i++ {
-		fmt.Printf("Channel val: %q\n", <-c)
+	c := fanIn(boringGenerator("A"), boringGenerator("B"))
+	for i := 0; i < 10; i++ {
+		fmt.Println(<-c)
 	}
-	fmt.Println("Exiting...")
+	fmt.Println("Exiting both goroutines...")
 }
