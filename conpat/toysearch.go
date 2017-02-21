@@ -29,9 +29,9 @@ func fakeSearch(k string) Search {
 
 // Googlev10 does a web search on that site
 func GoogleV10(q string) (res []Result) {
-	res = append(res, Web(q))
-	res = append(res, Image(q))
-	res = append(res, Video(q))
+	res = append(res, Web1(q))
+	res = append(res, Image1(q))
+	res = append(res, Video1(q))
 	return res
 }
 
@@ -40,13 +40,13 @@ func GoogleV20(q string) (finalResults []Result) {
 	c := make(chan Result)
 	// concurrently rather than serialized
 	go func() {
-		c <- Web(q)
+		c <- Web1(q)
 	}()
 	go func() {
-		c <- Image(q)
+		c <- Image1(q)
 	}()
 	go func() {
-		c <- Video(q)
+		c <- Video1(q)
 	}()
 
 	for i := 0; i < 3; i++ {
@@ -60,13 +60,13 @@ func GoogleV20(q string) (finalResults []Result) {
 func GoogleV21(q string) (finalResults []Result) {
 	c := make(chan Result)
 	go func() {
-		c <- Web(q)
+		c <- Web1(q)
 	}()
 	go func() {
-		c <- Image(q)
+		c <- Image1(q)
 	}()
 	go func() {
-		c <- Video(q)
+		c <- Video1(q)
 	}()
 
 	// now no need to wait for slow servers. Still no locks, condition vars,
