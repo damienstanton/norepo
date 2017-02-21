@@ -6,12 +6,12 @@ import (
 )
 
 var (
-	Web1   = fakeSearch("web")
-	Image1 = fakeSearch("Image")
-	Video1 = fakeSearch("Video")
-	Web2   = fakeSearch("web")
-	Image2 = fakeSearch("Image")
-	Video2 = fakeSearch("Video")
+	web1   = fakeSearch("web")
+	image1 = fakeSearch("Image")
+	video1 = fakeSearch("Video")
+	web2   = fakeSearch("web")
+	image2 = fakeSearch("Image")
+	video2 = fakeSearch("Video")
 )
 
 // Result is a fake result
@@ -29,9 +29,9 @@ func fakeSearch(k string) Search {
 
 // Googlev10 does a web search on that site
 func GoogleV10(q string) (res []Result) {
-	res = append(res, Web1(q))
-	res = append(res, Image1(q))
-	res = append(res, Video1(q))
+	res = append(res, web1(q))
+	res = append(res, image1(q))
+	res = append(res, video1(q))
 	return res
 }
 
@@ -40,13 +40,13 @@ func GoogleV20(q string) (finalResults []Result) {
 	c := make(chan Result)
 	// concurrently rather than serialized
 	go func() {
-		c <- Web1(q)
+		c <- web1(q)
 	}()
 	go func() {
-		c <- Image1(q)
+		c <- image1(q)
 	}()
 	go func() {
-		c <- Video1(q)
+		c <- video1(q)
 	}()
 
 	for i := 0; i < 3; i++ {
@@ -60,13 +60,13 @@ func GoogleV20(q string) (finalResults []Result) {
 func GoogleV21(q string) (finalResults []Result) {
 	c := make(chan Result)
 	go func() {
-		c <- Web1(q)
+		c <- web1(q)
 	}()
 	go func() {
-		c <- Image1(q)
+		c <- image1(q)
 	}()
 	go func() {
-		c <- Video1(q)
+		c <- video1(q)
 	}()
 
 	// now no need to wait for slow servers. Still no locks, condition vars,
@@ -101,13 +101,13 @@ func First(q string, replicas ...Search) Result {
 func GoogleV30(q string) (finalResults []Result) {
 	c := make(chan Result)
 	go func() {
-		c <- First(q, Web1, Web2)
+		c <- First(q, web1, web2)
 	}()
 	go func() {
-		c <- First(q, Image1, Image2)
+		c <- First(q, image1, image2)
 	}()
 	go func() {
-		c <- First(q, Video1, Video2)
+		c <- First(q, video1, video2)
 	}()
 
 	timeout := time.After(80 * time.Millisecond)
