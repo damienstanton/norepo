@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-/* Generator: function that returns a channel */
-
 // boringGenerator returns a receive-only chan of strings.
 // This one is nice because simply different invocations can describe distinct
 // services. For example: boringGenerator("A") boringGenerator("B")
@@ -33,9 +31,14 @@ func fanIn(in1, in2 <-chan string) <-chan string {
 				c <- s
 			case s := <-in2:
 				c <- s
-
 			}
 		}
 	}()
 	return c
+}
+
+// whisper represents the 'Chinese Whispers Game' section of the talk
+func whisper(left, right chan int) {
+	// neato
+	left <- 1 + <-right
 }
