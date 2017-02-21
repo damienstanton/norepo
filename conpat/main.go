@@ -16,6 +16,17 @@ type Ball struct {
 	hits int
 }
 
+// player is one of the players in our ping-pong ball game example
+func player(name string, table chan *Ball) {
+	for {
+		ball := <-table
+		ball.hits++
+		fmt.Println(name, ball.hits)
+		time.Sleep(100 * time.Millisecond)
+		table <- ball
+	}
+}
+
 func main() {
 	/* Basics */
 
