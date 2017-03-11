@@ -11,5 +11,7 @@ A place for different things that I want backed up, but don't need their own rep
 
 `interfaces` is a scratch area for interface design ideas
 
+`scanner` is a place for stdin/stdout stuff, since I never seem to remember
+
 #### License
 Copyright (c) 2017 Damien Stanton via the [MIT License](https://github.com/damienstanton/norepo/blob/master/LICENSE).
